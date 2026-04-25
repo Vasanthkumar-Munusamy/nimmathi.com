@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/articles", require("./routes/articleRoutes"));
+app.use("/api/articles", require("./routes/articleRoute"));
 
 app.get("/", (req, res) => {
   res.send("API Running...");
