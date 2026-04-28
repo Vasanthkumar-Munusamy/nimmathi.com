@@ -1,0 +1,11 @@
+import express from 'express';
+import { getListings, getListingById, createListing, updateListing, deleteListing } from '../controllers/matrimonial.controller.js';
+import { protect, adminOnly } from '../middleware/auth.middleware.js';
+import { uploadImage } from '../config/cloudinary.js';
+const router = express.Router();
+router.get('/', getListings);
+router.get('/:id', getListingById);
+router.post('/', uploadImage.single('photo'), createListing);
+router.put('/:id', protect, adminOnly, updateListing);
+router.delete('/:id', protect, adminOnly, deleteListing);
+export default router;

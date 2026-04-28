@@ -1,0 +1,10 @@
+import express from 'express';
+import { getAudioList, getAudioById, uploadAudio, deleteAudio } from '../controllers/audio.controller.js';
+import { protect, adminOnly } from '../middleware/auth.middleware.js';
+import { uploadAudio as audioUpload } from '../config/cloudinary.js';
+const router = express.Router();
+router.get('/', getAudioList);
+router.get('/:id', getAudioById);
+router.post('/', protect, adminOnly, audioUpload.single('audio'), uploadAudio);
+router.delete('/:id', protect, adminOnly, deleteAudio);
+export default router;
